@@ -160,10 +160,9 @@
 
                     console.dir(data);
                 })
-                .fail(function (data) {
+                .fail(function (xhr, status, error) {
                     var message = 'An error happend. Try again later.';
                     showMessage('#form-message', message);
-                    $('body').append(data);
                 });
         });
 

@@ -16,7 +16,3 @@ Route::get('/', 'MainController@showFeedbacks');
 Route::post('/', 'FeedBackFormController@handleSubmission');
 
 Route::post('/updateTable', 'FeedbackTableController@updateTable');
-
-Route::get('/test', function(\Illuminate\Http\Request $request) {
-
-});

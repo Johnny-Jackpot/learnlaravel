@@ -87,19 +87,18 @@ class Controller extends BaseController
     /**
      * If Website exist in db fetch it, else - save it
      *
-     * @param Request $request
+     * @param string $address
      * @return Website
      */
-    protected function getOrSaveWebsite (Request $request)
+    protected function getOrSaveWebsite ($address)
     {
-        $address = $request->input('website');
         $website = $this->getWebsite($address);
 
         if ($website->isNotEmpty()) {
             return $website->first();
         }
 
-        return $this->saveWebsite ($address);
+        return $this->saveWebsite($address);
     }
 
     /**
