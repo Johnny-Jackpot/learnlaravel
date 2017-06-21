@@ -17,12 +17,12 @@
     <footer class="footer">
         <div class="container-fluid">
             <p class="footer-info">
-                This is web interface for MySQL queries from learning program.
+                This is task 3.2 from learning program.
                 &copy Oleksandr Nazarenko 2017</p>
         </div>
     </footer>
 
     <script src="/js/app.js"></script>
-    <script src="/js/main.js"></script>
+    @yield('scripts')
 </body>
 </html>

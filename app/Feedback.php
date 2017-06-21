@@ -49,6 +49,7 @@ class Feedback extends Model
                 'feedback.feed as feedback',
                 'rate.rate as rate')
             ->where('status.status', 'like', 'published')
+            ->latest('date')
             ->get();
     }
 
@@ -69,6 +70,7 @@ class Feedback extends Model
                 'rate.rate as rate')
             ->where('status.status', 'like', 'published')
             ->where('date', '>=', $date)
+            ->latest('date')
             ->get();
     }
 }

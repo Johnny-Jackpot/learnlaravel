@@ -16,3 +16,11 @@ Route::get('/', 'MainController@showFeedbacks');
 Route::post('/', 'FeedBackFormController@handleSubmission');
 
 Route::post('/updateTable', 'FeedbackTableController@updateTable');
+
+Route::get('/admin', 'AdminController@showAdminPanel');
+
+Route::post('/moderate/publish', 'ModeratorController@publishComment');
+
+Route::post('/moderate/reject', 'ModeratorController@rejectComment');
+
+Route::post('/moderate/getrecentfeeds', 'ModeratorController@getRecentFeeds');

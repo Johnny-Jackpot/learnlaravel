@@ -19,7 +19,7 @@ class FeedBackFormController extends Controller
         $website = $this->getOrSaveWebsite($websiteAddress);
         $feedback = $this->saveFeedback($request, $author, $rate, $website);
 
-        return response()->json($feedback);
+        return response('Feedback was added successfully');
     }
 
     /**
