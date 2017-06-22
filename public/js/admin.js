@@ -29,6 +29,7 @@
         modal.modal('show');
     });
 
+    //confirm publishing or rejecting
     $('#confirm-moderating').click(function() {
         var dataset = $('#modal-moderate').data();
         var data = {
@@ -51,15 +52,14 @@
         $.post(url, data).done(function(data) {
             //remove row associated with pressed button
             $(selector).closest('tr').remove();
+            console.dir(data);
         });
 
         $('#modal-moderate').modal('hide');
 
     });
 
-
-
-
+    //check for recent feedbacks
     var jsonDate = new Date().toJSON();
     $.timer(25000, function() {
         var data = {
