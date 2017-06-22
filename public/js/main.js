@@ -113,13 +113,14 @@
         return tr.replace(':data', td);
     };
 
-    //Because MySQL current_timestamp save datetime in +3 timezone
-    var now = new Date();
-    now.setHours(now.getHours() + 3);
-    var jsonDate = now.toJSON();
+    function updateDateForRequestingData() {
+        return new Date().toJSON();
+    }
+
+    var jsonDate = updateDateForRequestingData();
     var token = $('input[name=_token]').val();
 
-    //every 25 second script will check if there is any new feedback
+        //every 25 second script will check if there is any new feedback
     $.timer(25000, function(){
         $.post('/updateTable', {_token: token, date: jsonDate})
             .done(function(data) {
@@ -127,7 +128,7 @@
                     return;
                 }
 
-                jsonDate = (new Date()).toJSON();
+                jsonDate = updateDateForRequestingData();
                 var tableUpdater = new TableUpdater('#feedbacks-table');
                 tableUpdater.updateTable(tableUpdater.generateTableRow(data[0]));
             });

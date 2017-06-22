@@ -2,10 +2,20 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-2">
             @if($feeds)
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover" id="feedbacks-table">
+                    <table class="table table-bordered table-hover table-condensed"
+                           id="feedbacks-table"
+                           data-_token="{{ csrf_token() }}">
+                        <colgroup>
+                            <col class="col-md-1">
+                            <col class="col-md-1">
+                            <col class="col-md-1">
+                            <col class="col-md-6">
+                            <col class="col-md-1">
+                            <col class="col-md-2">
+                        </colgroup>
                         <thead>
                         <tr>
                             <th>Author</th>
@@ -29,18 +39,13 @@
                                         <button type="button"
                                                 class="btn btn-success"
                                                 data-comment-id="{{ $record->id }}"
-                                                data-action="publish"
-                                                data-_token="{{ csrf_token() }}"
-
-                                        >
+                                                data-action="publish">
                                             Publish
                                         </button>
                                         <button type="button"
                                                 class="btn btn-danger"
                                                 data-comment-id="{{ $record->id }}"
-                                                data-action="reject"
-                                                data-_token="{{ csrf_token() }}"
-                                        >
+                                                data-action="reject">
                                             Reject
                                         </button>
                                     </div>
@@ -53,6 +58,29 @@
             @else
                 <p>There is no any new feedback yet. Please add your own.</p>
             @endif
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-moderate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modal-moderate-label"></h4>
+                </div>
+                <div class="modal-body" id="moderate-modal-body">
+                    <select class="form-control" id="reject-reason">
+                        <option value="lack of information">Lack of information</option>
+                        <option value="abusive language">Abusive language</option>
+                        <option value="advertising">Advertising</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Decline</button>
+                    <button type="button" class="btn btn-primary" id="confirm-moderating">Confirm</button>
+                </div>
+            </div>
         </div>
     </div>
 @stop

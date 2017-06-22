@@ -14,7 +14,14 @@
         <div class="col-md-6 col-md-offset-3">
             @if($feedbacks)
             <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="feedbacks-table">
+                <table class="table table-bordered table-hover table-condensed" id="feedbacks-table">
+                    <colgroup>
+                        <col class="col-md-1">
+                        <col class="col-md-2">
+                        <col class="col-md-2">
+                        <col class="col-md-6">
+                        <col class="col-md-1">
+                    </colgroup>
                     <thead>
                         <tr>
                             <th>Author</th>

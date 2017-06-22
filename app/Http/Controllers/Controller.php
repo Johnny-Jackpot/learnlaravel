@@ -153,4 +153,17 @@ class Controller extends BaseController
 
         return $feedback;
     }
+
+    /**
+     * @param string $datetime
+     * @return string
+     */
+    protected function adjustTimeZone($datetime)
+    {
+        $adjusted = new \DateTime($datetime);
+        $timezone = new \DateTimeZone('Europe/Kiev');
+        $adjusted->setTimezone($timezone);
+
+        return $adjusted->format('Y-m-d H:i:s');
+    }
 }

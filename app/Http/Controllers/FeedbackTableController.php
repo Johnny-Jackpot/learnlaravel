@@ -10,7 +10,7 @@ class FeedbackTableController extends Controller
 {
     public function updateTable(Request $request)
     {
-        $date = $request->input('date');
+        $date = $this->adjustTimeZone($request->input('date'));
         $feedbackModel = new Feedback();
         $feedbacks = $feedbackModel->getNewPublishedFeedbacksSinceDate($date);
 

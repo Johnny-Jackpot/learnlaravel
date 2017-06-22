@@ -45,12 +45,9 @@ class ModeratorController extends Controller
 
     public function getRecentFeeds(Request $request)
     {
-        return response()->json($request->all());
+        $date = $this->adjustTimeZone($request->input('date'));
 
-        $date = $request->input('date');
-
-
-        return Feedback::query()
+        $feedbacks = Feedback::query()
             ->whereHas('status', function($query){
                 $query->where('status','like', 'new');
             })
@@ -58,5 +55,11 @@ class ModeratorController extends Controller
             ->latest('date')
             ->where('date', '>=', $date)
             ->get();
+
+        if ($feedbacks->isEmpty()) {
+            return '';
+        }
+
+        return view('recentFeedback')->with('feeds', $feedbacks);
     }
 }
