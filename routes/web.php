@@ -17,10 +17,13 @@ Route::post('/', 'FeedBackFormController@handleSubmission');
 
 Route::post('/updateTable', 'FeedbackTableController@updateTable');
 
-Route::get('/admin', 'AdminController@showAdminPanel');
+Route::get('/admin', 'AdminController@showAdminPanel')->middleware('auth.basic');
 
-Route::post('/moderate/publish', 'ModeratorController@publishComment');
+Route::post('/moderate/publish', 'ModeratorController@publishComment')->middleware('auth.basic');
 
-Route::post('/moderate/reject', 'ModeratorController@rejectComment');
+Route::post('/moderate/reject', 'ModeratorController@rejectComment')->middleware('auth.basic');
 
-Route::post('/moderate/getrecentfeeds', 'ModeratorController@getRecentFeeds');
+Route::post('/moderate/getrecentfeeds', 'ModeratorController@getRecentFeeds')->middleware('auth.basic');
+
+
+
