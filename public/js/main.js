@@ -6,9 +6,18 @@
     var time = 60;
     var count = 0;
     var timer;
+    var now = new Date();
+    var dateInLocalStorage = new Date(window.localStorage.getItem('submittedAt'));
+    //difference in seconds
+    var diff = (now.getTime() - dateInLocalStorage.getTime()) / 1000;
+    diff = Math.round(Math.abs(diff));
+    if (diff <= time) {
+        showTimer(time - diff);
+    }
+
 
     //show how much time left to submit another form
-    function showTimer() {
+    function showTimer(time) {
         count = time;
 
         $('#timer-display').html(count);
@@ -72,7 +81,14 @@
                 return;
             }
 
+            //store submitted time in localStorage
+            window.localStorage.setItem('submittedAt', new Date().toJSON());
+
             var data = $('#feedback-form').serialize();
+
+            if (!timer) {
+                showTimer(time);
+            }
 
             $.post('/', data)
                 .done(function(data) {
@@ -81,10 +97,6 @@
                     ['#website', '#feedback', '#author', '#email'].forEach(function(item) {
                         $(item).val('');
                     });
-
-                    if (!timer) {
-                        showTimer();
-                    }
 
                     console.dir(data);
                 })
