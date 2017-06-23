@@ -18,28 +18,29 @@ class Feedback extends Model
 
     public function author()
     {
-        return $this->belongsTo('App\Author');
+        return $this->belongsTo(Author::class);
     }
 
     public function website()
     {
-        return $this->belongsTo('App\Website');
+        return $this->belongsTo(Website::class);
     }
 
     public function rate()
     {
-        return $this->belongsTo('App\Rate');
+        return $this->belongsTo(Rate::class);
     }
 
     public function status()
     {
-        return $this->belongsTo('App\Status');
+        return $this->belongsTo(Status::class);
     }
 
     public function getAllPublishedFeedbacks()
     {
-        return DB::table('feedback')
-            ->join('author', 'feedback.author_id', '=', 'author.id')
+        /** @var  $table */
+        $table = DB::table('feedback');
+        return $table->join('author', 'feedback.author_id', '=', 'author.id')
             ->join('website', 'feedback.website_id', '=', 'website.id')
             ->join('rate', 'feedback.rate_id', '=', 'rate.id')
             ->join('status', 'feedback.status_id', '=', 'status.id')

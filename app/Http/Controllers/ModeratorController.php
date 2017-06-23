@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Feedback;
+use App\Mail\FeedbackRejected;
 use App\Status;
-use App\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+
 
 class ModeratorController extends Controller
 {
@@ -20,20 +21,23 @@ class ModeratorController extends Controller
 
     public function rejectComment(Request $request)
     {
-
         $id = $request->input('commentId');
-
         $feedback = $this->changeStatusOfFeedback(Status::STATUS_REJECTED, $id);
         $author = $feedback->author()->getResults();
-        $email = $author->email;
+        $emailAddress = $author->email;
 
-        if (!isset($email) || empty($email)) {
+
+        if (!isset($emailAddress) || empty($emailAddress)) {
             return response()->json(['mailWasSended' => false]);
         }
 
         $authorName = $author->name;
+        $reason = $request->input('reason');
+        $mail = new FeedbackRejected($feedback, $authorName, $reason);
 
-        return response()->json($author);
+        Mail::to($emailAddress)->queue($mail);
+
+        return response()->json();
     }
 
     /**
