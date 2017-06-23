@@ -42,3 +42,7 @@ body {
     width: 150px;
 }
 
+.social-buttons span {
+    vertical-align: top !important;
+}
+

@@ -114,7 +114,17 @@
     </div>
 
 @stop
+
 @section('scripts')
+
     <script src="/js/timer-plugin-jquery.js"></script>
     <script src="/js/main.js"></script>
+@stop
+
+@section('footer-content')
+    <div class="social-buttons">
+        <iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fguestbook.com&width=96&layout=button&action=like&size=small&show_faces=true&share=true&height=65&appId" width="96" height="25" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+        <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+        <script type="IN/Share" data-url="http://guestbook.com/" data-counter="right"></script>
+    </div>
 @stop

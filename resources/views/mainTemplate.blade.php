@@ -16,9 +16,16 @@
 
     <footer class="footer">
         <div class="container-fluid">
-            <p class="footer-info">
-                This is task 3.2 from learning program.
-                &copy Oleksandr Nazarenko 2017</p>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-2">
+                    <p class="footer-info">
+                        This is task 3.2 from learning program.
+                        &copy Oleksandr Nazarenko 2017</p>
+                </div>
+                <div class="col-md-5">
+                    @yield('footer-content')
+                </div>
+            </div>
         </div>
     </footer>
 
